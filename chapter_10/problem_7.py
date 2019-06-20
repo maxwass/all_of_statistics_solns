@@ -8,7 +8,6 @@ from scipy import stats
 
 
 def main(arguments):
-    from problem_7 import check_density
     n_1 = n_2 = 200
     x_1,x_2   = 160, 148
     p_1_mle   = x_1/n_1
