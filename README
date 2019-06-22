@@ -1,4 +1,6 @@
-Subset of exercises from Larry Wasserman's 'All of Statistics'
+My worked solutions to a subset of exercises from Larry Wasserman's 'All of Statistics'. 
 
-run with python3
+pdf of text, available for free online, is included in the top level folder.
 
+
+run all programs with python3 (e.g. python3 problem_2.py)

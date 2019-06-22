@@ -5,9 +5,6 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
-#sys.path.append(os.path.dirname(os.path.abspath('../confidence_interval.py')))
-#from confidence_interval import normal_95_confid_interval,pivotal_confid_interval,percentile_confid_interval
-
 
 #Sampling from uniform distribution:
 # X_1,...,X_10 ~ U[a,b] with a=1, b=3, n=10
@@ -22,67 +19,7 @@ from scipy import stats
 
 #take many true samples of size sample_size to approximate the density
 # of theta_n = max(Xi), i=1->sample_size
-def check_density(sample_size,K, true_a, true_b):
-    mean_mle_n  = np.zeros(K) #store estimates from each n-sample
-    mean_pli_n  = np.zeros(K)
-    for k in range(K):
-        X = np.random.uniform(true_a,true_b,sample_size)
-        mean_mle_n[k] = (np.amax(X) - np.amin(X))/2 + np.amin(X)
-        mean_pli_n[k] = np.mean(X)
-
-    print("Sampling Distribution of the Mean. {0:d} trials of {1:d} samples, Xi~U[a,b]".format(K,sample_size))
-    print("Mean of Sampling Distribution:")
-    print("MLE:     {0:f}".format(np.mean(mean_mle_n)))
-    print("Plug in: {0:f}".format(np.mean(mean_pli_n)))
-    print("Standard Error: Stdv of sampling distribution")
-    print("MLE:     {0:f}".format(np.std(mean_mle_n)))
-    print("Plug in: {0:f}".format(np.std(mean_pli_n)))
-    bins = np.linspace(true_a-0.5, true_b+0.5,1000)
-    plt.hist(mean_mle_n, bins, alpha=0.5,density=False, label='MLE')
-    plt.hist(mean_pli_n, bins, alpha=0.5,density=False, label='Plug In Est')
-    plt.legend(loc='upper right')
-    plt.show()
-
-
-def compare_param_nonparam_bootstrap(B,plug_in_estimate,T_boot,T_boot_p,est_std_err, est_std_err_p, conf_ints):
-
-    bins = np.linspace(0,1.2,50)
-    #Plot Histogram: boostrap theta_hat_n outcomes
-    # Creates two subplots and unpacks the output array immediately
-    f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
-    ax1.hist(T_boot, bins,density=True, label='sampled')
-    #ax1.title("Bootstrapped theta_hat_n: est std_err:{0:f}".format(est_std_err))
-    ax1.set_ylabel('#of occurences/{0:d})'.format(B))
-    ax1.set_title('NonParametric Bootstrap theta_n')
-    ax1.axvline(plug_in_estimate, color='k', linestyle='dashed', linewidth=1)
-    _, max_ = plt.ylim()
-    ax1.text(plug_in_estimate + plug_in_estimate/10, max_ - max_/10,'plug in estimate: {:.2f}'.format(plug_in_estimate))
-    (l,r) = conf_ints[0]
-    ax1.axvline(x=l, color = 'r')
-    ax1.axvline(x=r, color = 'r')
-    (l_piv,r_piv) = conf_ints[1]
-    ax1.axvline(x=l_piv, color = 'b')
-    ax1.axvline(x=r_piv, color = 'b')
-    (l_per,r_per) = conf_ints[2]
-    ax1.axvline(x=l_per, color = 'g')
-    ax1.axvline(x=r_per, color = 'g')
-
-    ax2.hist(T_boot_p, bins,density=True, label='sampled')
-    ax2.set_ylabel('#of occurences/{0:d})'.format(B))
-    ax2.set_title('Parametric Bootstrap theta_n')
-    #plt.title("Bootstrapped theta_hat_n: est std_err:{0:f}".format(est_std_err_p))
-    ax2.axvline(plug_in_estimate, color='k', linestyle='dashed', linewidth=1)
-    _, max_ = plt.ylim()
-    ax2.text(plug_in_estimate + plug_in_estimate/10, max_ - max_/10,'plug in estimate: {:.2f}'.format(plug_in_estimate))
-    (cip_l, cip_r) = conf_ints[3]
-    ax2.axvline(x=cip_l, color = 'y')
-    ax2.axvline(x=cip_r, color = 'y')
-    plt.show()
-    time.sleep(5)
-
-
 def main(arguments):
-    from problem_2 import check_density
     true_a   = 1
     true_b   = 3
     true_tau = 2 # mean

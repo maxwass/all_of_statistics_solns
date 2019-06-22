@@ -13,10 +13,6 @@ from confidence_interval import normal_95_confid_interval,pivotal_confid_interva
 
 #comparing the three confidence interval methods (Normal, Pivotal,
 # and Percentile) to estimate the skew of the rv exp(Y), Y~N(0,1)
-
-#Analytically:
-# E[exp(Y)] =
-
 def main(arguments):
 
     true_skew    = 6.184
