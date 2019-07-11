@@ -3,4 +3,12 @@ My worked solutions to a subset of exercises from Larry Wasserman's 'All of Stat
 pdf of text, available for free online, is included in the top level folder.
 
 
+Extra resources I found useful:
+Link to old course website if Larry Wasserman: 
+    http://www.stat.cmu.edu/~larry/=stat325.02/
+Hypothesis Testing: 
+    https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/index.htm
+    https://www.youtube.com/watch?v=phbw9r1iUDI
+
+
 run all programs with python3 (e.g. python3 problem_2.py)
