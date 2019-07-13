@@ -1,0 +1,16 @@
+
+- Uniform Prior over (0,1) <==> Beta(1,1)
+    -showing equiv: https://stats.stackexchange.com/questions/318541/uniform-vs-beta1-1-prior
+    -play with beta distribution:
+        https://www.wolframalpha.com/input/?i=beta+distribution+alpha+%3D+1,+beta+%3D+1
+- normal pdf * normal pdf  is proportional to a gaussian
+
+Conjugate priors:
+    Bernoulli likelihood * Uniform Prior => Beta()
+        https://rpubs.com/sitaramgautam/145048
+
+    normal likelihood * N(a,b) => N(something complicated)
+        unknown mean, known variance:
+        https://mcs.utm.utoronto.ca/~nosedal/sta313/sta313-normal-mean.pdf
+        https://www.youtube.com/watch?v=c-d05z0_5mw
+    Beta * Beta = Beta

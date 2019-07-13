@@ -51,9 +51,10 @@ def main(arguments):
     #     use simulation to find the posterior mean and posterior
     #     90 interval for tau
 
-    #analytically if you evaluate integral:
-    # tau_mean = integral [0,1] integral [0,1] (p2-p1)*L(p1)*L(p2)/norm_const dp1 dp2
-    #          = 0.1923
+    #analytically: https://www.wolframalpha.com/input/?i=integral+%5B0,1%5D+integral+%5B0,1%5D+(y-x)(x%5E30)*(1-   x)%5E(50-30)*(y%5E40)*(1-y)%5E(50-40)%2F(7.9415*10%5E-28)+dx+dy
+    # tau_mean = integral [0,1] integral [0,1] (p2-p1)*L(p1)*L(p2)/norm_const dp1 dp2= 0.1923
+    # integral: https://www.wolframalpha.com/input/?i=integral+%5B0,1%5D+integral+%5B0,1%5D+(y-x)(x%5E30)*(1-x)%5E(50-30)*(y%5E40)*(1-y)%5E(50-40)%2F(7.9415*10%5E-28)+dx+dy
+
 
     # 1) f(p1,p2|xn,ym) ~ L(p1)*L(p2) = f(p1|xn)*f(p2|ym) <=> independent
     # 2) Uniform[0,1]   = Beta[1,1]
