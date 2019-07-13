@@ -1,0 +1,10 @@
+x1,...,xn ~ U[0,t]
+f(t) ~ 1/t
+f(xn|t) = product i:1->n of f(xi\t)
+        = { 1/t^n, 0<xi<t for all i
+          {  0   , o.w.
+        = { 1/t^n, x_max<t
+          {  0   , o.w.
+f(t|xn) = f(xn|t)*f(t)
+        = { 1/t^(n+1), x_max<t
+          {  0   , o.w.
