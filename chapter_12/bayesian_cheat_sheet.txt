@@ -9,8 +9,9 @@ Conjugate priors:
     Bernoulli likelihood * Uniform Prior => Beta()
         https://rpubs.com/sitaramgautam/145048
 
-    normal likelihood * N(a,b) => N(something complicated)
+    normal likelihood * N(a,b^2) => N(check first link)
         unknown mean, known variance:
+        http://www.ams.sunysb.edu/~zhu/ams570/Bayesian_Normal.pdf
         https://mcs.utm.utoronto.ca/~nosedal/sta313/sta313-normal-mean.pdf
         https://www.youtube.com/watch?v=c-d05z0_5mw
     Beta * Beta = Beta
