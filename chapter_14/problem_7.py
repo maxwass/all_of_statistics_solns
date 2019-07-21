@@ -64,24 +64,38 @@ def main(arguments):
     num_cov = data.shape[1]
 
     #test combinations function
-    S = range(num_cov)
     '''
     for subset in itertools.combinations(S,2):
         print(subset)
     '''
     #combinations funciton will return all size r subsets of input iterable
-    print([0,1,2,3,4])
-    print(fieldnames[1:])
+    toy_data = np.array([ [0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4] ])
+    print('toy_data')
+    print(toy_data)
+    print(toy_data.shape)
+    print(data.shape)
+    #print([0,1,2,3,4])
+    #print(fieldnames[1:])
     print('input set size: {0:d}'.format(num_cov))
     i = 1
     for r in range(num_cov+1):
         print('subset size: {0:d}'.format(r))
-        for subset in itertools.combinations(S,r):
+        for subset in itertools.combinations(range(num_cov),r):
             print('\t{0:d}: '.format(i), end =" ")
             print(subset)
             i=i+1
+            #pull out columns from data matrix corresponding to subset
+            #convert subset into logical array
+            bool_select_cov = np.zeros(num_cov, dtype=bool)
+            print(bool_select_cov)
+            for j in subset:
+                bool_select_cov[j] = True
+            print(bool_select_cov)
+            covariate_subset = toy_data[:,bool_select_cov]
+            print(covariate_subset)
 
     # multiple regression
+    '''
                         #VOL	HP    MPG    SP    WT
     select_covariates = [True, True, False, True, True]
     select_outcome    = np.logical_not(select_covariates)
@@ -96,7 +110,7 @@ def main(arguments):
     #training error = n * mse
     R_tr = n*mean_squared_error(outcome, multi_predict)
     print("Training Error: {0:f}".format(R_tr))
-
+    '''
 
 
 if __name__ == '__main__':
