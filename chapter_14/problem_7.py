@@ -10,7 +10,6 @@ import itertools
 from collections import OrderedDict
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-
 #Fit MPG from HP
 def main(arguments):
     C = 28 # number of nondata lines in .dat file
@@ -61,6 +60,27 @@ def main(arguments):
     wt  = data[:,4]
     log_mpg = np.log(mpg)
 
+    #number of covariates:
+    num_cov = data.shape[1]
+
+    #test combinations function
+    S = range(num_cov)
+    '''
+    for subset in itertools.combinations(S,2):
+        print(subset)
+    '''
+    #combinations funciton will return all size r subsets of input iterable
+    print([0,1,2,3,4])
+    print(fieldnames[1:])
+    print('input set size: {0:d}'.format(num_cov))
+    i = 1
+    for r in range(num_cov+1):
+        print('subset size: {0:d}'.format(r))
+        for subset in itertools.combinations(S,r):
+            print('\t{0:d}: '.format(i), end =" ")
+            print(subset)
+            i=i+1
+
     # multiple regression
                         #VOL	HP    MPG    SP    WT
     select_covariates = [True, True, False, True, True]
@@ -77,45 +97,7 @@ def main(arguments):
     R_tr = n*mean_squared_error(outcome, multi_predict)
     print("Training Error: {0:f}".format(R_tr))
 
-    x = np.linspace(np.amin(hp)-50, np.amax(hp)+50,num=100)
 
-    # simple linear regression: mpg = f(hp)
-    model     = LinearRegression()
-    model.fit(hp[:,np.newaxis],mpg[:,np.newaxis])
-    predict   = model.predict(x[:,np.newaxis])
-
-    intercept = model.intercept_
-    slope     = model.coef_
-    R2       = model.score(hp[:,np.newaxis],mpg[:,np.newaxis])
-    s = "mpg = {} * hp + {}\n R^2: {}".format(slope[0],intercept, R2)
-
-    # log(mpg)
-    model_2     = LinearRegression()
-    model_2.fit(hp[:,np.newaxis],log_mpg[:,np.newaxis])
-    predict_2   = model_2.predict(x[:,np.newaxis])
-    predict_2_e = np.exp(predict_2)
-    intercept_2 = model_2.intercept_
-    slope_2     = model_2.coef_
-    R2_2       = model_2.score(hp[:,np.newaxis],log_mpg[:,np.newaxis])
-    s_2 = "log(mpg) = {} * hp  + {}\n mpg= {}*exp({}*hp) \n R^2: {}".format(slope_2[0],intercept_2,intercept_2, slope_2[0], R2_2)
-
-
-    if(plot):
-        f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
-        ax1.plot(hp,mpg,'bo', x, predict,'r')
-        ax1.set_xlabel('Horsepower')
-        ax1.set_ylabel('MPG')
-        ax1.set_title("HP vs MPG")
-        ax1.text(0.3,0.7,s,fontsize=15,transform=ax1.transAxes)
-        #ax1.text(0.8, 0.8, s, fontsize=12)
-
-        ax2.plot(hp,log_mpg,'bo', x, predict_2,'r')
-        ax2.plot(hp,mpg, 'bo', x, predict_2_e, 'r')
-        ax2.set_xlabel('Horsepower')
-        ax2.set_ylabel('LOG(MPG)')
-        ax2.set_title("HP vs LOG(MPG)")
-        ax2.text(0.3,0.5, s_2, fontsize=15, transform=ax2.transAxes)
-        plt.show()
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
