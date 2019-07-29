@@ -1,0 +1,23 @@
+errata:
+all of statistics chapter 15 exercises 6 and 7 are ill posed. Covariance matrices are not positive definite.
+
+
+Explanation:
+By the defn of multivariance normal, covariance matrix must be positive definite.
+Thm 0*:A Hermitian (or symmetric) matrix is positive definite iff all its eigenvalues are positive
+
+problem 6: Cov(X) = [2,6; 6,2] -> eigenval = {-4,8}
+problem 7: Cov(X) = [1,3; 3,1] -> eigenval = {-2,4}
+
+Thus, by Thm 0, niether Cov matrix is positive definite. Thus definition of multivariate normals is ill posed. 
+
+*link to thm: http://mathworld.wolfram.com/PositiveDefiniteMatrix.html
+links to eigendecomp:
+https://matrixcalc.org/en/vectors.html#diagonalize%28%7B%7B2,6%7D,%7B6,2%7D%7D%29
+https://matrixcalc.org/en/vectors.html#diagonalize%28%7B%7B1,3%7D,%7B3,1%7D%7D%29
+
+To Fix:
+problem 6: Cov(X) <= [6,2; 2,6] -> eigenval = {4,8}
+problem 7: Cov(X) <= [3,1; 1,3] -> eigenval = {2,4}
+
+
