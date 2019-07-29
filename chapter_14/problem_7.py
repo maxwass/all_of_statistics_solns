@@ -8,7 +8,7 @@ from scipy import stats
 import csv
 import itertools
 from collections import OrderedDict
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.metrics import mean_squared_error
 #Fit MPG from HP
 class model_subset():
@@ -272,6 +272,15 @@ def main(arguments):
     print('\nBackward Search Result:')
     print_model_info(bwd_model, covariates_names)
     print('\n\n\n')
+
+    clf = Lasso(alpha=0.5)
+    clf.fit(X,Y)
+    print(clf.intercept_)
+    print(clf.coef_)
+    mse  = mean_squared_error(Y, clf.predict(X))
+    R_tr = X.shape[0]*mse
+    print("MSE: {0:.2f}, Training Error: {1:.2f}".format(mse, R_tr))
+    #score       = score_func(R_tr, cov_subset, var_est)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
