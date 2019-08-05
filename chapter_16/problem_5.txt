@@ -1,0 +1,57 @@
+Define random variables
+Y := Race of Victim     = { 0, Black Victim
+                          { 1, White Victim
+Z := Sentencing Outcome = { 0, No Death Sentence
+                          { 1, Death Sentence
+
+We want to estiamte whether
+(i)  These random variables are independent or not => The sentencing outcome is associated with the race of the victim
+(ii) The strength of the dependence
+
+(i) X(i,j) := the count of outcomes for which Y=i and Z=j
+    Xi     := the count of outcomes for which Y=i
+    Yj     := the count of outcomes for which Z=j
+    N      := number of samples
+
+                   No Death Sentence   Death Sentence
+                        Z = 0              Z = 1
+Black Victim Y = 0       641                14     |      655 <- total black victims
+White Victim Y = 1       594                62     |      656 <- total white victims
+                    -------------------------------
+                         1235               76            1311 <-N <- total samples
+                     (total NDS)        (total DS)
+
+perform 3 tests for independence
+    (a) T := 2*Sum(i,j) { X(i,j)*log[ X(i,j)*N / (Xi*Xj)] }
+        T ~ Chi-Squares(k =1)
+        T ~= 35.24
+        computation: link 1
+
+    (b) U := Sum(i,j) { ( Observed Counts - Expected Count Given Indep )^2/Expected Count Given Indep }
+        U ~ Chi-Squares(k =1)
+        U ~= 32.1
+        computation: link 2
+
+    (c) y      = odds(Z=DS|Y=WV)/odds(Z=DS|Y=BV)
+        y_hat  = X(1,1)*X(0,0) / X(0,1)*X(1,0)
+        W := log[y_hat] / se_hat(y_hat)
+        W ~ Normal(0,1)
+        W = 5.19
+
+        reject null with strong evidence in all cases
+(ii) Strength of dependence
+    OR  := odds(Z=DS|Y=WV)/odds(Z=DS|Y=BV)
+    LOR := log(OR)
+    OR_hat     = X(1,1)*X(0,0) / X(0,1)*X(1,0)
+    OR_se_hat  = OR_hat*LOR_se_hat
+    LOR_hat    = log(OR_hat)
+    LOR_se_hat = 1/sqrt(1/X(0,0) + 1/X(1,0) + 1/X(0,1) + 1/X(1,1))
+
+    For this data:
+    OR_hat  = 1.56
+    LOR_hat = 0.44
+
+
+links:
+1) https://www.wolframalpha.com/input/?i=2(641*.039+%2B+594*(-.04)-14%2B62*(.49))
+2) https://www.wolframalpha.com/input/?i=(641+-+655*1235%2F1311)%5E2+%2F+(655*1235%2F1311)+%2B+(594+-+656*1235%2F1311)%5E2+%2F+(656*1235%2F1311)+%2B+(14+-+655*76%2F1311)%5E2+%2F+(655*76%2F1311)+%2B+(62+-+656*76%2F1311)%5E2+%2F+(656*76%2F1311)
